@@ -1,0 +1,7 @@
+config.py
+ranking.csv
+
+.vscode
+
+__pycache__
+*.pyc
