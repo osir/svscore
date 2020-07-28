@@ -12,7 +12,7 @@ EVENT_ORGANISER = 'Verein'
 TIME_UTC_OFFSET = 2
 
 # How many decimal places to display on the scoreboard (can be 0)
-SCORE_DECIMALS = False
+SCORE_DECIMALS = 0
 
 # How long to wait between intervals
 SCROLL_INTERVAL_MS = 20
