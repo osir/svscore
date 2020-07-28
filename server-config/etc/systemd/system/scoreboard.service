@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn Scoreboard
+After=Network.Target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/scoreboard
+ExecStart=/usr/bin/gunicorn --workers 1 --bind 127.0.0.1:5000 -m 007 server:app
+
+[Install]
+WantedBy=multi-user.target

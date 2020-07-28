@@ -1,0 +1,12 @@
+server {
+    listen 80;
+    server_name scoreboard.local;
+    try_files $uri $uri/ =404
+
+    root /opt/scoreboard;
+    index index.html;
+    location / {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:5000;
+    }
+}

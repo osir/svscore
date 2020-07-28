@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <title>Rangliste 2020</title>
+    <link rel="stylesheet" href="/static/style/reset.css" >
+    <link rel="stylesheet" href="/static/style/ranking.css" >
+</head>
+
+<body>
+    <main>
+        <h1>{{ g.event.get_fullname() }}</h1>
+        <h3>Aktualisiert um <span class="time">{{ update_time.strftime('%H:%M') }}</span></h3>
+        <table class="ranking-table" class="blueTable">
+            <thead>
+                <tr>
+                    <th>Rang</th>
+                    <th>Teilnehmer/in</th>
+                    <th>Jahrgang</th>
+                    <th>Verein</th>
+                    <th>Spg</th>
+                    <th>Punkte</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in ranking.entries %}
+                <tr id="rank-{{ r.position }}">
+                    <td class="position">{{ r.position }}.</td>
+                    <td class="competitor">{{ r.competitor }}</td>
+                    <td>
+                        <span class="year">{{ r.year }}</span>
+                        <span class="category">{{ r.category }}</span>
+                    </td>
+                    <td>
+                        <span class="town">{{ r.town }}</span>,
+                        <span class="association">{{ r.association }}</span>
+                    </td>
+                    <td class="weapon-type">{{ r.weapon_type }}</td>
+                    <td class="score">{{ r.score | round(config['SCORE_DECIMALS'], 'floor') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <script src="/static/js/autoscroll.js"></script>
+        <script>
+            window.onload = () => {
+                let interval = Number(document.getElementById('setting-scroll-interval').value)
+                let pixel = Number(document.getElementById('setting-scroll-pixel').value)
+                let waitTop = Number(document.getElementById('setting-scroll-wait-top').value)
+                let waitBottom = Number(document.getElementById('setting-scroll-wait-bottom').value)
+                initScroll(interval, pixel, waitTop, waitBottom)
+            }
+        </script>
+        <div style="display: none;" id="settings-container">
+            <input id="setting-scroll-interval" type="text" value="{{ config['SCROLL_INTERVAL_MS'] }}" />
+            <input id="setting-scroll-pixel" type="text" value="{{ config['SCROLL_DISTANCE_PX'] }}" />
+            <input id="setting-scroll-wait-top" type="text" value="{{ config['SCROLL_WAIT_TOP_MS'] }}" />
+            <input id="setting-scroll-wait-bottom" type="text" value="{{ config['SCROLL_WAIT_BOTTOM_MS'] }}" />
+        </div>
+    </main>
+</body>
+</html>
