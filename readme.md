@@ -1,19 +1,31 @@
 # Server Setup
 
-> Alle Befehle werden mit dem `root`-User ausgeführt.
-> Getestet unter `Raspbian buster`.
+> Alle Befehle werden mit dem `root`-User ausgeführt.  
+> Getestet unter `Raspbian buster` (lite image).  
+
+## Generelles
+
+- Shell als `root`-User starten
+```
+sudo -i
+```
+
+- Pakete updaten und rebooten
+```
+apt update -y && apt upgrade -y && reboot
+```
 
 ## Dependencies
 
 - Packete installieren
 ```
-apt install git gunicorn nginx python3-pip
+apt install git nginx python3-pip
 ```
 
 - Repository an den richtigen Ort clonen
 ```
 mkdir -p /opt/scoreboard
-git clone https://github.com/... /opt/scoreborad
+git clone https://github.com/... /opt/scoreboard
 ```
 
 - Requirements für Python installieren
@@ -26,8 +38,8 @@ python3 -m pip install -r /opt/scoreboard/requirements.txt
 
 - Beispielkonfiguration kopieren und anpassen
 ```
-cp /opt/scoreborad/config.example.py /opt/scoreborad/config.py
-vi /opt/scoreborad/config.py
+cp /opt/scorebroad/config.example.py /opt/scorebroad/config.py
+vi /opt/scorebroad/config.py
 ```
 
 - Domainname und IP-Adresse vom Ranglisten-Server eintragen
@@ -37,6 +49,11 @@ echo '10.11.12.13 hauptsystem.localdomain' >> /etc/hosts
 
 
 ## NGINX und Gunicorn Setup
+
+- Gunicorn installieren
+```
+python3 -m pip install gunicorn
+```
 
 - Config an den richtigen Ort kopieren
 ```
