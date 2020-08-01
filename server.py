@@ -63,7 +63,7 @@ def render_ranking(err : Exception = None):
         update_time = datetime.now()
         ranking = cache[1]
     else:
-        # Show the cached version or the error if the cache is empty
+        # If no error, grab the scoreboard normally
         try:
             update_time, ranking = g.api.get_scores()
             cache = (update_time, ranking)
