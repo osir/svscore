@@ -86,5 +86,30 @@ systemctl restart nginx
 
 # Screen Setup
 
-TODO
+- Pakete installieren
+```
+apt install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox surf unclutter
+```
 
+- Config files an den richtigen Ort kopieren
+```
+cp /opt/scoreboard/client-config/autostart.html /home/pi/autostart.html
+cp /opt/scoreboard/client-config/autostart /home/pi/.config/autostart
+
+```
+
+Im editor `/home/pi/.bash_profile` öffnen und auf der untersten Linie einfügen:
+```
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
+```
+
+Config-Menü öffnen
+```
+raspi-config
+```
+Folgende Option auswählen:
+- **3** Boot Options
+    - **B1** Desktop / CLI
+        - **B2** Console Autologin
+
+> Nach einem `reboot` sollte sich nun automatisch der Browser öffnen.
