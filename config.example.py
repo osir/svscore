@@ -19,9 +19,9 @@ SCROLL_INTERVAL_MS = 20
 # How many pixels every interval the scoreboard should scroll down
 SCROLL_DISTANCE_PX = 1
 # How long to wait at the top of the page before starting to scroll
-SCROLL_WAIT_TOP_MS = 6000
+SCROLL_WAIT_TOP_S = 6
 # How long to wait at the bottom of the page before jumping to top
-SCROLL_WAIT_BOTTOM_MS = 3000
+SCROLL_WAIT_BOTTOM_S = 3
 
 
 ### SERVER ###
