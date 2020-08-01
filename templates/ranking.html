@@ -37,7 +37,11 @@
                         <span class="association">{{ r.association }}</span>
                     </td>
                     <td class="weapon-type">{{ r.weapon_type }}</td>
-                    <td class="score">{{ r.score | round(config['SCORE_DECIMALS'], 'floor') }}</td>
+                    {% if config['SCORE_DECIMALS'] %}
+                        <td class="score">{{ r.score | round(config['SCORE_DECIMALS'], 'floor') }}</td>
+                    {% else %}
+                        <td class="score">{{ r.score | int }}</td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
