@@ -21,7 +21,7 @@ h3 .time {
 main {
     margin: 0 auto;
     padding: 0 0;
-    min-width: 90vw;
+    min-width: 98vw;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
