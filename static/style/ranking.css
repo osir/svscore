@@ -6,8 +6,12 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+header {
+    margin: 2vh 0;
+}
+
 h1 {
-    font-size: 3em;
+    font-size: 6vh;
 }
 
 h3 {
@@ -27,16 +31,45 @@ main {
     flex-wrap: nowrap;
 }
 
+span {
+    font-size: inherit;
+}
+
 .ranking-table {
     width: 100%;
-    margin-top: 30px;
     text-align: left;
     border-collapse: collapse;
 }
 
-.ranking-table th,
+.ranking-table thead,
+.ranking-table tfoot {
+    background: #1C6EA4;
+    background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+}
+
+.ranking-table th {
+    font-size: 3vh;
+    font-weight: bold;
+    font-variant-caps: small-caps;
+    color: #FFFFFF;
+}
+
 .ranking-table td {
-    padding: 0 5px;
+    padding: 0 0;
+    font-size: 4.3vh;
+}
+
+.ranking-table th>span,
+.ranking-table td>span{
+    padding: 0;
+    font-size: inherit;
+}
+
+.ranking-table .year,
+.ranking-table .category,
+.ranking-table .town,
+.ranking-table .association {
+    font-size: 3vh;
 }
 
 .ranking-table .competitor,
@@ -44,22 +77,11 @@ main {
     font-weight: bold;
 }
 
-.ranking-table tbody td {
-    font-size: 30px;
+.ranking-table .position,
+.ranking-table .score {
+    text-align: right;
 }
 
 .ranking-table tr:nth-child(even) {
     background: #D0E4F5;
-}
-
-.ranking-table thead {
-    background: #1C6EA4;
-    background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-}
-
-.ranking-table thead th {
-    font-size: 15px;
-    font-weight: bold;
-    font-variant-caps: small-caps;
-    color: #FFFFFF;
 }

@@ -10,8 +10,10 @@
 
 <body>
     <main>
-        <h1>{{ g.event.get_fullname() }}</h1>
-        <h3>Aktualisiert um <span class="time">{{ update_time.strftime('%H:%M') }}</span></h3>
+        <header>
+            <h1>{{ g.event.get_fullname() }}</h1>
+            <h3>Aktualisiert um <span class="time">{{ update_time.strftime('%H:%M') }}</span></h3>
+        </header>
         <table class="ranking-table" class="blueTable">
             <thead>
                 <tr>
@@ -45,7 +47,21 @@
                 </tr>
                 {% endfor %}
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>Rang</th>
+                    <th>Teilnehmer/in</th>
+                    <th>Jahrgang</th>
+                    <th>Verein</th>
+                    <th>Spg</th>
+                    <th>Punkte</th>
+                </tr>
+            </tfoot>
         </table>
+        <header>
+            <h1>{{ g.event.get_fullname() }}</h1>
+            <h3>Aktualisiert um <span class="time">{{ update_time.strftime('%H:%M') }}</span></h3>
+        </header>
         <script src="/static/js/autoscroll.js"></script>
         <script>
             window.onload = () => {
@@ -53,14 +69,14 @@
                 let pixel = Number(document.getElementById('setting-scroll-pixel').value)
                 let waitTop = Number(document.getElementById('setting-scroll-wait-top').value)
                 let waitBottom = Number(document.getElementById('setting-scroll-wait-bottom').value)
-                initScroll(interval, pixel, waitTop, waitBottom)
+                startScroll(interval, pixel, waitTop, waitBottom)
             }
         </script>
         <div style="display: none;" id="settings-container">
             <input id="setting-scroll-interval" type="text" value="{{ config['SCROLL_INTERVAL_MS'] }}" />
             <input id="setting-scroll-pixel" type="text" value="{{ config['SCROLL_DISTANCE_PX'] }}" />
-            <input id="setting-scroll-wait-top" type="text" value="{{ config['SCROLL_WAIT_TOP_MS'] }}" />
-            <input id="setting-scroll-wait-bottom" type="text" value="{{ config['SCROLL_WAIT_BOTTOM_MS'] }}" />
+            <input id="setting-scroll-wait-top" type="text" value="{{ config['SCROLL_WAIT_TOP_S'] }}" />
+            <input id="setting-scroll-wait-bottom" type="text" value="{{ config['SCROLL_WAIT_BOTTOM_S'] }}" />
         </div>
     </main>
 </body>
