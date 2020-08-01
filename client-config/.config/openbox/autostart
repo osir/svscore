@@ -1,0 +1,16 @@
+
+# x setup
+xset -dpms &     # disable DPMS features
+xset s off &     # disable screen saver
+xset s noblank & # don't blank the video device
+
+# autohide cursor
+unclutter &
+
+# start the browser
+URL='file:///home/pi/autostart.html'
+BRO='surf -bFgIKMNpS -u screenpi'
+#BRO='/usr/bin/firefox --browser --foreground --no-remote --new-instance --url'
+
+$BRO "$URL"
+
