@@ -38,7 +38,7 @@ const startScroll = (intervalDelayMs, scrollDistancePx, topDelayS, bottomDelayS)
  * T - Go to top and stop there
  */
 const shortcutHandler = (e) => {
-    console.log('Key pressed: ' + e.code)
+    log('Key pressed: ' + e.code)
     if (e.code === 'KeyP') {
         paused = !paused
         e.preventDefault()
@@ -65,7 +65,7 @@ const mainInterval = () => {
     if (pos === 0) {
         // If it isn't set yet, set the timeout to some seconds in the future
         if (timeout === null) {
-            console.log('Entered top')
+            log('Entered top')
             timeout = new Date()
             timeout.setSeconds(timeout.getSeconds() + topDelay)
         }
@@ -79,7 +79,7 @@ const mainInterval = () => {
     } else if (pos === window.scrollMaxY) {
         // If it isn't set ye, wait before resetting and check for an updatee
         if (timeout === null) {
-            console.log('Entered bottom')
+            log('Entered bottom')
             timeout = new Date()
             timeout.setSeconds(timeout.getSeconds() + bottomDelay)
             // Start checking for updates
@@ -104,19 +104,25 @@ const mainInterval = () => {
 
 // Checks the server and reloads if there are new scores
 const checkForUpdates = () => {
-    console.log('Started checking for update')
+    log('Started checking for update')
     let xhr = new XMLHttpRequest()
     xhr.open('GET', '/api/lastupdate', true)
     xhr.onreadystatechange = () => {
         // If request is done, compare dates
         if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log('Response: ' + xhr.response)
+            log('Response: ' + xhr.response)
             if (lastUpdate < new Date(xhr.response)) {
-                console.log('Server is newer, reloading...')
+                log('Server is newer, reloading...')
                 location = location
             }
         }
     }
-    console.log('Sending request')
+    log('Sending request')
     xhr.send()
+}
+
+const log = (msg) => {
+    let d = new Date()
+    let t = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds()
+    console.log(t + ' ' + msg)
 }
