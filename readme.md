@@ -94,7 +94,7 @@ apt install --no-install-recommends xserver-xorg x11-xserver-utils xinit openbox
 - Config files an den richtigen Ort kopieren
 ```
 cp /opt/scoreboard/client-config/autostart.html /home/pi/autostart.html
-cp /opt/scoreboard/client-config/autostart /home/pi/.config/autostart
+cp /opt/scoreboard/client-config/.config/openbox/autostart /home/pi/.config/openbox/autostart
 
 ```
 
