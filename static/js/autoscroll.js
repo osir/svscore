@@ -133,6 +133,8 @@ const checkForUpdates = () => {
             if (lastUpdate < new Date(xhr.response)) {
                 log('Server is newer, reloading...')
                 location = location
+            } else {
+                log('Nothing to update')
             }
         }
     }
