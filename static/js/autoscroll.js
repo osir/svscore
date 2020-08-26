@@ -11,6 +11,8 @@ let bottomDelay
 
 
 const startScroll = (intervalDelayMs, scrollDistancePx, topDelayS, bottomDelayS) => {
+    log('Initializing scrolling')
+
     // Scroll to top
     window.scrollTo(0, 0)
 
@@ -26,8 +28,17 @@ const startScroll = (intervalDelayMs, scrollDistancePx, topDelayS, bottomDelayS)
     topDelay = topDelayS
     bottomDelay = bottomDelayS
 
-    // Start the main loop
-    setInterval(mainInterval, intervalDelay);
+    log('[cfg] Interval delay: ' + intervalDelay + 'ms')
+    log('[cfg] Scroll distance: ' + intervalDelay + 'px')
+    log('[cfg] Top waiting: ' + topDelay + 's')
+    log('[cfg] Bottom waiting: ' + bottomDelay + 's')
+
+    // Start the main interval (async)
+    setInterval(mainInterval, intervalDelay)
+
+    log('Initialization complete, mainInterval started')
+    let s = ((calcMaxScroll() / scrollDistance) * 20) / 1000
+    log('Estimated scroll time: ' + s + ' seconds (' + (s/60).toFixed(1) + 'min)')
 }
 
 
@@ -65,21 +76,22 @@ const mainInterval = () => {
     if (pos === 0) {
         // If it isn't set yet, set the timeout to some seconds in the future
         if (timeout === null) {
-            log('Entered top')
+            log('Entered top, waiting for timeout: ' + topDelay)
             timeout = new Date()
             timeout.setSeconds(timeout.getSeconds() + topDelay)
         }
         // If the current time has passed the timeout, start scrolling
         if (new Date() > timeout) {
+            log('Timeout reached, starting to scroll')
             timeout = null
             window.scrollBy(0, scrollDistance)
         }
 
     // If the bottom was reached, wait before resetting and check for an update
-    } else if (pos === window.scrollMaxY) {
+    } else if (pos >= calcMaxScroll()) {
         // If it isn't set ye, wait before resetting and check for an updatee
         if (timeout === null) {
-            log('Entered bottom')
+            log('Entered bottom, waiting for timeout: ' + bottomDelay)
             timeout = new Date()
             timeout.setSeconds(timeout.getSeconds() + bottomDelay)
             // Start checking for updates
@@ -102,6 +114,11 @@ const mainInterval = () => {
 }
 
 
+// Returns the lowest scrollable coordinate of the window
+// by subtracting the browser window's height from the element's height
+const calcMaxScroll = () => document.body.scrollHeight - window.innerHeight
+
+
 // Checks the server and reloads if there are new scores
 const checkForUpdates = () => {
     log('Started checking for update')
@@ -109,8 +126,10 @@ const checkForUpdates = () => {
     xhr.open('GET', '/api/lastupdate', true)
     xhr.onreadystatechange = () => {
         // If request is done, compare dates
-        if (xhr.readyState == 4 && xhr.status == 200) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
             log('Response: ' + xhr.response)
+            log('Response: ' + new Date(xhr.response))
+            log('Last update: ' + lastUpdate)
             if (lastUpdate < new Date(xhr.response)) {
                 log('Server is newer, reloading...')
                 location = location
@@ -120,6 +139,7 @@ const checkForUpdates = () => {
     log('Sending request')
     xhr.send()
 }
+
 
 const log = (msg) => {
     let d = new Date()
